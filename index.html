@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1565c0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Health Check" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Health Check Collector</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="app-mark">
+          <span class="material-symbols-rounded" aria-hidden="true">ecg_heart</span>
+        </div>
+        <div>
+          <h1>Health Check Collector</h1>
+          <p>Blood test reports by profile</p>
+        </div>
+      </div>
+      <button id="backupBtn" class="icon-button tonal" type="button" title="Export backup">
+        <span class="material-symbols-rounded" aria-hidden="true">download</span>
+      </button>
+    </header>
+
+    <main class="app-shell">
+      <aside class="profiles-panel">
+        <div class="panel-head">
+          <h2>Profiles</h2>
+          <button id="addProfileBtn" class="filled-button compact" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">person_add</span>
+            Add
+          </button>
+        </div>
+        <div id="profileList" class="profile-list"></div>
+      </aside>
+
+      <section class="content-panel">
+        <div id="emptyState" class="empty-state">
+          <span class="material-symbols-rounded empty-icon" aria-hidden="true">clinical_notes</span>
+          <h2>Create a profile first</h2>
+          <p>Each person has their own profile and can keep multiple blood test reports.</p>
+        </div>
+
+        <div id="profileView" class="hidden">
+          <div class="profile-header">
+            <div>
+              <h2 id="profileName"></h2>
+              <p id="profileMeta"></p>
+            </div>
+            <div class="profile-actions">
+              <button id="editProfileBtn" class="tonal-button icon-button" type="button" title="Edit profile">
+                <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+              </button>
+              <button id="deleteProfileBtn" class="danger-button icon-button" type="button" title="Delete profile">
+                <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+              </button>
+              <button id="addReportBtn" class="filled-button" type="button">
+                <span class="material-symbols-rounded" aria-hidden="true">add_photo_alternate</span>
+                Add report
+              </button>
+            </div>
+          </div>
+          <div id="reportList" class="report-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="profileDialog">
+      <form id="profileForm" method="dialog">
+        <h2 id="profileDialogTitle">Add profile</h2>
+        <label>
+          Name
+          <input id="newProfileName" autocomplete="name" required />
+        </label>
+        <label>
+          Birthday
+          <input id="newProfileBirthDate" type="date" />
+        </label>
+        <label>
+          Sex
+          <select id="newProfileSex">
+            <option value="">Optional</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <div class="dialog-actions">
+          <button value="cancel" class="text-button" type="button" data-close-dialog>Cancel</button>
+          <button id="profileSubmitBtn" value="default" class="filled-button" type="submit">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="reportDialog" class="wide-dialog">
+      <form id="reportForm" method="dialog">
+        <h2 id="reportDialogTitle">Add blood test report</h2>
+        <label>
+          Report date
+          <input id="reportDate" type="date" required />
+        </label>
+        <label>
+          Lab or hospital
+          <input id="labName" placeholder="Hospital Sultanah Aminah" />
+        </label>
+        <label>
+          Report files
+          <input id="reportFiles" type="file" accept="image/*,application/pdf" multiple />
+        </label>
+        <div class="ocr-bar">
+          <button id="runOcrBtn" class="filled-button" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">document_scanner</span>
+            Read files
+          </button>
+          <span id="ocrStatus">Choose clear photos of each page.</span>
+        </div>
+        <div id="imagePreview" class="image-preview"></div>
+        <div class="manual-row">
+          <button id="addManualResultBtn" class="tonal-button" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">add</span>
+            Add result row
+          </button>
+        </div>
+        <div id="resultEditor" class="result-editor"></div>
+        <div class="dialog-actions">
+          <button value="cancel" class="text-button" type="button" data-close-dialog>Cancel</button>
+          <button id="reportSubmitBtn" value="default" class="filled-button" type="submit">Save report</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="reportDetailDialog" class="wide-dialog">
+      <div class="detail-head">
+        <div>
+          <h2 id="detailTitle"></h2>
+          <p id="detailMeta"></p>
+        </div>
+        <div class="detail-actions">
+          <button id="editReportBtn" class="tonal-button" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+            Edit
+          </button>
+          <button id="deleteReportBtn" class="danger-button" type="button">
+            <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+            Delete
+          </button>
+          <button class="text-button" type="button" data-close-dialog>Close</button>
+        </div>
+      </div>
+      <div id="detailBody"></div>
+    </dialog>
+
+    <dialog id="indicatorDialog">
+      <div class="indicator-info">
+        <div class="indicator-icon">
+          <span class="material-symbols-rounded" aria-hidden="true">info</span>
+        </div>
+        <div>
+          <h2 id="indicatorTitle"></h2>
+          <p id="indicatorCategory"></p>
+        </div>
+        <p id="indicatorDescription"></p>
+        <button class="filled-button" type="button" data-close-dialog>Done</button>
+      </div>
+    </dialog>
+
+    <div id="updateBar" class="update-bar hidden" role="status">
+      <span>App update is ready.</span>
+      <button id="refreshAppBtn" class="filled-button compact" type="button">Refresh</button>
+    </div>
+  </body>
+</html>

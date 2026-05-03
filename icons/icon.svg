@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Health Check Collector app icon">
+  <rect width="512" height="512" rx="112" fill="#1565c0"/>
+  <circle cx="384" cy="128" r="84" fill="#d7e3ff" opacity=".9"/>
+  <rect x="122" y="86" width="268" height="340" rx="44" fill="#ffffff"/>
+  <rect x="190" y="70" width="132" height="58" rx="24" fill="#d7e3ff"/>
+  <path d="M216 236h-44a12 12 0 0 1-12-12v-44a12 12 0 0 1 12-12h44a12 12 0 0 1 12 12v44a12 12 0 0 1-12 12Z" fill="#2e7d32"/>
+  <path d="M194 180v44M172 202h44" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M260 178h72M260 220h52M160 286h184M160 338h132" stroke="#1565c0" stroke-width="24" stroke-linecap="round"/>
+  <path d="M344 337c0 30-42 52-42 52s-42-22-42-52a25 25 0 0 1 42-18 25 25 0 0 1 42 18Z" fill="#ba1a1a"/>
+</svg>
