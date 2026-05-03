@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minimal health trend icon">
-  <rect width="512" height="512" rx="112" fill="#101828"/>
-  <rect x="112" y="112" width="288" height="288" rx="64" fill="#ffffff"/>
-  <path d="M256 166v54M229 193h54" stroke="#0b8043" stroke-width="22" stroke-linecap="round"/>
-  <path d="M164 314h184" stroke="#101828" stroke-width="20" stroke-linecap="round"/>
-  <path d="M178 286l54-42 46 42 70-74" fill="none" stroke="#0b57d0" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="178" cy="286" r="11" fill="#0b57d0"/>
-  <circle cx="232" cy="244" r="11" fill="#0b57d0"/>
-  <circle cx="278" cy="286" r="11" fill="#0b57d0"/>
-  <circle cx="348" cy="212" r="11" fill="#0b57d0"/>
+  <rect width="512" height="512" rx="112" fill="#f7f9fc"/>
+  <rect x="72" y="72" width="368" height="368" rx="88" fill="#ffffff"/>
+  <path d="M256 130v74M219 167h74" stroke="#0b8043" stroke-width="30" stroke-linecap="round"/>
+  <path d="M136 338h240" stroke="#1d1b20" stroke-width="26" stroke-linecap="round"/>
+  <path d="M156 302l72-58 58 58 90-100" fill="none" stroke="#0b57d0" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="156" cy="302" r="15" fill="#0b57d0"/>
+  <circle cx="228" cy="244" r="15" fill="#0b57d0"/>
+  <circle cx="286" cy="302" r="15" fill="#0b57d0"/>
+  <circle cx="376" cy="202" r="15" fill="#0b57d0"/>
 </svg>
