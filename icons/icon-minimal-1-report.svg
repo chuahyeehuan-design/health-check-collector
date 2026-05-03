@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minimal health report icon">
+  <rect width="512" height="512" rx="112" fill="#f7f9fc"/>
+  <rect x="132" y="86" width="248" height="340" rx="44" fill="#ffffff" stroke="#1d1b20" stroke-width="18"/>
+  <path d="M190 184h132M190 246h92M190 308h132" stroke="#1d1b20" stroke-width="22" stroke-linecap="round"/>
+  <path d="M256 358v44M234 380h44" stroke="#0b57d0" stroke-width="22" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minimal blood test icon">
+  <rect width="512" height="512" rx="112" fill="#ffffff"/>
+  <path d="M256 92s104 120 104 212c0 62-45 116-104 116s-104-54-104-116c0-92 104-212 104-212Z" fill="none" stroke="#1d1b20" stroke-width="24" stroke-linejoin="round"/>
+  <path d="M256 282v78M217 321h78" stroke="#c5221f" stroke-width="24" stroke-linecap="round"/>
+</svg>

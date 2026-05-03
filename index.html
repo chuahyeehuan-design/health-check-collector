@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1565c0" />
+    <meta name="theme-color" content="#101828" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Health Check" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -174,6 +174,39 @@
         </div>
         <p id="indicatorDescription"></p>
         <button class="filled-button" type="button" data-close-dialog>Done</button>
+      </div>
+    </dialog>
+
+    <dialog id="backupDialog">
+      <div class="backup-sheet">
+        <div>
+          <h2>Backup and export</h2>
+          <p>Save the file to Google Drive from the phone share sheet or download screen.</p>
+        </div>
+        <button id="exportJsonBtn" class="backup-option" type="button">
+          <span class="material-symbols-rounded" aria-hidden="true">database</span>
+          <span>
+            <strong>Full app backup</strong>
+            <small>JSON file for restoring profiles, reports, results, and saved pages.</small>
+          </span>
+        </button>
+        <button id="exportCsvBtn" class="backup-option" type="button">
+          <span class="material-symbols-rounded" aria-hidden="true">table</span>
+          <span>
+            <strong>Spreadsheet export</strong>
+            <small>CSV file for Google Sheets, Excel, and result tracking.</small>
+          </span>
+        </button>
+        <button id="exportSummaryBtn" class="backup-option" type="button">
+          <span class="material-symbols-rounded" aria-hidden="true">description</span>
+          <span>
+            <strong>Readable summary</strong>
+            <small>HTML report that can be opened, printed, or saved as PDF.</small>
+          </span>
+        </button>
+        <div class="dialog-actions">
+          <button class="text-button" type="button" data-close-dialog>Close</button>
+        </div>
       </div>
     </dialog>
 

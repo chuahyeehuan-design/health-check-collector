@@ -150,7 +150,10 @@ function wireEvents() {
   $('addReportBtn').addEventListener('click', openReportDialog);
   $('editReportBtn').addEventListener('click', editActiveReport);
   $('deleteReportBtn').addEventListener('click', deleteActiveReport);
-  $('backupBtn').addEventListener('click', exportBackup);
+  $('backupBtn').addEventListener('click', openBackupDialog);
+  $('exportJsonBtn').addEventListener('click', exportJsonBackup);
+  $('exportCsvBtn').addEventListener('click', exportCsvBackup);
+  $('exportSummaryBtn').addEventListener('click', exportSummaryBackup);
   $('refreshAppBtn').addEventListener('click', refreshApp);
   document.querySelectorAll('[data-close-dialog]').forEach((button) => {
     button.addEventListener('click', () => button.closest('dialog').close());
@@ -636,16 +639,168 @@ function renderDraftPageThumb(page) {
   $('imagePreview').append(wrapper);
 }
 
-function exportBackup() {
-  const blob = new Blob([JSON.stringify({ profiles: state.profiles }, null, 2)], {
-    type: 'application/json',
+function openBackupDialog() {
+  $('backupDialog').showModal();
+}
+
+function exportJsonBackup() {
+  const backup = {
+    app: 'Health Check Collector',
+    format: 'health-check-collector-full-backup',
+    exportedAt: new Date().toISOString(),
+    profiles: state.profiles,
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  saveOrShareFile(blob, `health-check-full-backup-${todayStamp()}.json`, 'Full app backup');
+}
+
+function exportCsvBackup() {
+  const rows = [[
+    'Profile',
+    'Birthday',
+    'Sex',
+    'Report Date',
+    'Lab',
+    'Category',
+    'Indicator',
+    'Result',
+    'Unit',
+    'Flag',
+    'Reference Range',
+    'Page',
+  ]];
+
+  state.profiles.forEach((profile) => {
+    profile.reports.forEach((report) => {
+      report.results.forEach((result) => {
+        rows.push([
+          profile.name,
+          profile.birthDate || '',
+          profile.sex || '',
+          report.date || '',
+          report.labName || '',
+          result.category || '',
+          result.name || '',
+          result.value || '',
+          result.unit || '',
+          result.flag || '',
+          result.referenceRange || '',
+          result.page || '',
+        ]);
+      });
+    });
   });
+
+  const csv = rows.map((row) => row.map(csvCell).join(',')).join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  saveOrShareFile(blob, `health-check-results-${todayStamp()}.csv`, 'Spreadsheet export');
+}
+
+function exportSummaryBackup() {
+  const exportedOn = new Intl.DateTimeFormat('en-MY', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date());
+
+  const profileSections = state.profiles.map((profile) => `
+    <section>
+      <h2>${escapeHtml(profile.name)}</h2>
+      <p>${escapeHtml([profile.birthDate && `Birthday ${formatDate(profile.birthDate)}`, profile.sex].filter(Boolean).join(' - ') || 'No profile details')}</p>
+      ${(profile.reports || []).map((report) => `
+        <article>
+          <h3>${escapeHtml(formatDate(report.date))}</h3>
+          <p>${escapeHtml(report.labName || 'Unknown lab')} - ${report.results.length} results - ${flaggedCount(report)} flagged</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Indicator</th>
+                <th>Result</th>
+                <th>Flag</th>
+                <th>Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${report.results.map((result) => `
+                <tr>
+                  <td>${escapeHtml(result.category || '')}</td>
+                  <td>${escapeHtml(result.name || '')}</td>
+                  <td>${escapeHtml(`${result.value || ''} ${result.unit || ''}`.trim())}</td>
+                  <td>${escapeHtml(result.flag || '')}</td>
+                  <td>${escapeHtml(result.referenceRange || '')}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </article>
+      `).join('')}
+    </section>
+  `).join('');
+
+  const html = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health Check Summary ${todayStamp()}</title>
+  <style>
+    body { margin: 32px; color: #1a1c1e; font-family: Arial, sans-serif; }
+    h1 { color: #1565c0; }
+    section { margin-top: 28px; page-break-inside: avoid; }
+    article { margin-top: 18px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    th, td { border-bottom: 1px solid #d9e1ec; padding: 8px; text-align: left; vertical-align: top; }
+    th { color: #555f6d; }
+    p { color: #555f6d; }
+    @media print { body { margin: 18mm; } }
+  </style>
+</head>
+<body>
+  <h1>Health Check Collector Summary</h1>
+  <p>Exported ${escapeHtml(exportedOn)}</p>
+  ${profileSections || '<p>No profiles saved yet.</p>'}
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  saveOrShareFile(blob, `health-check-summary-${todayStamp()}.html`, 'Readable summary');
+}
+
+async function saveOrShareFile(blob, fileName, title) {
+  const file = new File([blob], fileName, { type: blob.type });
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({
+        title,
+        text: 'Save this health check backup to Google Drive.',
+        files: [file],
+      });
+      $('backupDialog').close();
+      return;
+    } catch {
+      // Fall back to download when the share sheet is cancelled or unavailable.
+    }
+  }
+
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `health-check-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  link.download = fileName;
   link.click();
   URL.revokeObjectURL(url);
+  $('backupDialog').close();
+}
+
+function csvCell(value = '') {
+  const text = String(value).replace(/"/g, '""');
+  return `"${text}"`;
+}
+
+function todayStamp() {
+  return new Date().toISOString().slice(0, 10);
 }
 
 function selectedProfile() {

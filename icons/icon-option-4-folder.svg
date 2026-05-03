@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Personal health folder app icon">
+  <rect width="512" height="512" rx="112" fill="#1f1f1f"/>
+  <path d="M80 178c0-33 27-60 60-60h82c18 0 35 8 46 22l24 30h80c33 0 60 27 60 60v132c0 33-27 60-60 60H140c-33 0-60-27-60-60V178Z" fill="#fbbc04"/>
+  <path d="M80 238h352v124c0 33-27 60-60 60H140c-33 0-60-27-60-60V238Z" fill="#fff3cd"/>
+  <rect x="140" y="190" width="232" height="176" rx="34" fill="#ffffff"/>
+  <path d="M230 286h-46a12 12 0 0 1-12-12v-46a12 12 0 0 1 12-12h46a12 12 0 0 1 12 12v46a12 12 0 0 1-12 12Z" fill="#0f9d58"/>
+  <path d="M207 229v44M185 251h44" stroke="#ffffff" stroke-width="17" stroke-linecap="round"/>
+  <path d="M278 226h48M278 266h32M172 326h168" stroke="#1f1f1f" stroke-width="20" stroke-linecap="round"/>
+</svg>

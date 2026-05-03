@@ -38,3 +38,11 @@ If the old version still appears, fully close and reopen the app. On iPhone, Saf
 ## Data Reminder
 
 Reports are stored locally on the device. Before deleting the app, clearing browser data, or changing phones, use the backup export button in the app.
+
+The app provides three backup formats:
+
+- Full app backup: JSON file for restoring the app data later.
+- Spreadsheet export: CSV file for Google Sheets or Excel.
+- Readable summary: HTML file that can be opened, printed, or saved as PDF.
+
+On iPhone or Android, use the share sheet after export and choose Google Drive. If the share sheet is not available, download the file first and then upload it to Google Drive from the Files app or Drive app.

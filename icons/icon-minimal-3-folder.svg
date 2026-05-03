@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Minimal health folder icon">
+  <rect width="512" height="512" rx="112" fill="#f5f7fa"/>
+  <path d="M92 178c0-35 28-63 63-63h76l42 50h84c35 0 63 28 63 63v116c0 35-28 63-63 63H155c-35 0-63-28-63-63V178Z" fill="#ffffff" stroke="#1d1b20" stroke-width="20" stroke-linejoin="round"/>
+  <path d="M256 250v72M220 286h72" stroke="#0b8043" stroke-width="24" stroke-linecap="round"/>
+</svg>

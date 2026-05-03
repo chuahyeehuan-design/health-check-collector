@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Blood test results app icon">
+  <rect width="512" height="512" rx="112" fill="#146c5f"/>
+  <circle cx="382" cy="126" r="76" fill="#a7ffeb" opacity=".8"/>
+  <rect x="92" y="116" width="328" height="276" rx="46" fill="#ffffff"/>
+  <path d="M152 326h56V226h-56v100Zm76 0h56V178h-56v148Zm76 0h56V250h-56v76Z" fill="#e8f5e9"/>
+  <path d="M180 326V226M256 326V178M332 326v-76" stroke="#0b8043" stroke-width="28" stroke-linecap="round"/>
+  <path d="M154 362h204" stroke="#146c5f" stroke-width="22" stroke-linecap="round"/>
+  <path d="M231 116c14-33 50-33 64 0" stroke="#ffffff" stroke-width="20" stroke-linecap="round"/>
+  <path d="M180 150h68M180 190h36" stroke="#146c5f" stroke-width="22" stroke-linecap="round"/>
+</svg>

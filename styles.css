@@ -529,6 +529,50 @@ select:focus {
   line-height: 1.5;
 }
 
+.backup-sheet {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+}
+
+.backup-sheet p {
+  margin-top: 4px;
+  color: var(--md-sys-color-on-surface-variant);
+  line-height: 1.5;
+}
+
+.backup-option {
+  min-height: 76px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 8px;
+  justify-content: flex-start;
+  padding: 14px;
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container);
+  text-align: left;
+}
+
+.backup-option > .material-symbols-rounded {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary-container);
+  flex: 0 0 auto;
+}
+
+.backup-option span:last-child {
+  display: grid;
+  gap: 4px;
+}
+
+.backup-option small {
+  color: var(--md-sys-color-on-surface-variant);
+  line-height: 1.35;
+}
+
 .update-bar {
   position: fixed;
   right: 18px;

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Family health profiles app icon">
+  <rect width="512" height="512" rx="112" fill="#6750a4"/>
+  <rect x="82" y="112" width="348" height="288" rx="52" fill="#ffffff"/>
+  <circle cx="198" cy="222" r="42" fill="#7d5260"/>
+  <path d="M128 336c13-54 127-54 140 0" fill="#eaddff"/>
+  <circle cx="324" cy="216" r="36" fill="#386a20"/>
+  <path d="M268 336c11-47 107-47 118 0" fill="#d9ead3"/>
+  <path d="M116 156h280" stroke="#6750a4" stroke-width="22" stroke-linecap="round"/>
+  <path d="M346 386c0 28-40 50-40 50s-40-22-40-50a24 24 0 0 1 40-17 24 24 0 0 1 40 17Z" fill="#ba1a1a"/>
+  <path d="M132 116V88h88v28M292 116V88h88v28" stroke="#eaddff" stroke-width="20" stroke-linecap="round"/>
+</svg>
